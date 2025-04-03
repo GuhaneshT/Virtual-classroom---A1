@@ -77,7 +77,7 @@ const JoinClassroom = () => {
         setLoading(true);
         try {
           const response = await axios.get(
-            "http://127.0.0.1:8000/my_submissions",
+            "/my_submissions",
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -109,7 +109,7 @@ const JoinClassroom = () => {
 
     try {
       const response = await axios.post(
-        `http://127.0.0.1:8000/join_classroom`,
+        `/join_classroom`,
         { class_id: classId },
         {
           headers: {
@@ -152,7 +152,7 @@ const JoinClassroom = () => {
   };
   const handleEnrolledCourses = async () => {
     try{
-    const response = await axios.get(`http://127.0.0.1:8000/courses_in_student`,{
+    const response = await axios.get(`/courses_in_student`,{
       headers: {
         Authorization: `Bearer ${token}`,
       },

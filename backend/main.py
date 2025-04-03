@@ -26,6 +26,7 @@ import io
 from datetime import datetime
 import os
 from dotenv import load_dotenv
+from fastapi.staticfiles import StaticFiles
 
 
 kw_model = KeyBERT()
@@ -75,7 +76,7 @@ fs = motor.motor_asyncio.AsyncIOMotorGridFSBucket(db)
 #google api related
 SCOPES = ["https://www.googleapis.com/auth/calendar.events"]
 CLIENT_SECRET_FILE = "client_secret.json"  
-REDIRECT_URI = "http://127.0.0.1:8000/oauth2callback"
+REDIRECT_URI = os.getenv("REDIRECT_URI","http://127.0.0.1:8000/oauth2callback")
 TOKEN_FILE = "token.json"  # Token storage
 
 
@@ -89,6 +90,7 @@ app.add_middleware(
     allow_headers=["*"],  # Allow all headers
 )
 
+app.mount("/", StaticFiles(directory="static", html=True), name="static")
 
 # redis_host = "localhost"  # The host of the remote Redis service
 # redis_port = 6379  # Usually 6379 for Redis # If authentication is required
